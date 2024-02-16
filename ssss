@@ -1,0 +1,194 @@
+import telebot
+import config
+import random
+import keyboards
+from telebot import types
+ 
+bot = telebot.TeleBot(config.token)
+ 
+ 
+@bot.message_handler(commands=['start'])
+def welcome(message):
+ 
+    bot.send_message(message.chat.id, "Добро пожаловать, {0.first_name}!\nВ, HQD магазин.\n ⚡️РАБОТАЕМ!РАБОТАЕМ!"
+                                      "⚡РАБОТАЕМ!⚡️\n🔥СУМАСШЕДШИЕ СКИДКИ 01.10-28.10🔥\n🍒ПОЧТИ ВСЕ ВКУСЫ И "
+                                      "ВИДЫ ПО 230Р🍒\n🎯В НАЛИЧИИ ЕСТЬ ПОЧТИ ВСЕ🎯\n🔞ПРОДАЕМ ДАЖЕ ЕСЛИ НЕТ 18-ти🔞\n"
+                                      "⚠️ЕСЛИ ВАШЕГО ГОРОДА НЕТ В СПИСКЕ ПИСАТЬ \n@hqdmarket_support⚠️\n\n💳КУПИТЬ💳 - "
+                                      "ОФОРМЛЕНИЕ ЗАКАЗА\n❓F.A.Q ❓- ОТВЕТЫ НА ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ\n💤ПОДДЕРЖКА💤 "
+                                      "- ЕСЛИ У ВАС ОСТАЛИСЬ ВОПРОСЫ ПИШИТЕ МЕНЕДЖЕРУ(РАБОТАЕТ 24/7)".format(message.from_user, bot.get_me()),
+        parse_mode='html', reply_markup=keyboards.keyboardMain)
+ 
+ 
+@bot.message_handler(content_types=['text'])
+def mess(message):
+ 
+    if message.text == "💳КУПИТЬ💳":
+        bot.send_message(message.chat.id, 'Выберите hqd', parse_mode='html', reply_markup=keyboards.keyboardHQD)
+    elif message.text == "ANSWER":
+        bot.send_message(message.chat.id, 'ОТВЕТЫ НА ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ!!!\n\n🔞МНЕ ПРОДАДУТ ЕСЛИ МНЕ НЕТ 18 ЛЕТ?'
+                                         '🔞\n❗️МЫ НЕ ТРЕБУЕМ НИКАКИХ ДОКУМЕНТОВ ДЛЯ ПОДТВЕРЖДЕНИЯ СОВЕРШЕННОЛЕТНЕГО'
+                                         ' ВОЗРАСТА,СООТВЕТСТВЕННО ПРОДАЁМ ВСЕМ(ТОЛЬКО НЕ СПАЛИТЕСЬ ПЕРЕД МАМКОЙ😹)'
+                                         '❗️\n\n📦КАК Я ПОЛУЧУ СВОИ HQD?📦\n❗️В БОЛЬШИНСТВЕ ГОРОДОВ РАБОТАЮТ КУРЬЕРЫ,'
+                                         'КОТОРЫЕ ДОСТАВЯТ ВАШИ АШКИ МАКСИМАЛЬНО БЫСТРО КУДА УГОДНО(ХОТЬ К ВАШЕЙ '
+                                         'ШКОЛЕ ПОД ДВЕРЬ)❗️\n\n🏢МОЕГО ГОРОДА НЕТ В СПИСКЕ. ЧТО ДЕЛАТЬ?🏢\n❗️НЕКОТОРЫХ '
+                                         'ГОРОДОВ НЕТ В СПИСКЕ , ПРОСТО НАПИШИТЕ МЕНЕДЖЕРУ АНДРЕЮ @hqdmarket_support И ОН '
+                                         'РЕШИТ ВАШУ ПРОБЛЕМУ❗️\n\n💵КАК ОПЛАТИТЬ ТОВАР💵\n❗️МЫ ПРИНИМАЕМ ОПЛАТУ ТОЛЬКО '
+                                         'НА КИВИ КОШЕЛЁК ИЛИ БАНКОВСКУЮ КАРТУ И РАБОТАЕМ ПО ПРЕДОПЛАТЕ. ЕСЛИ ВЫ'
+                                         ' СОМНЕВАЕТЕСЬ В ЧЕСТНОСТИ НАШЕГО МАГАЗИНА МЫ ГОТОВЫ КАЖДОМУ ОТПРАВИТЬ '
+                                         'СВЕЖЕЕ ВИДЕО С УПАКОВАННЫМИ ПОСЫЛКАМИ.ПЕРЕД ОПЛАТОЙ МЫ ВСЕГДА ОТПРАВЛЯЕМ '
+                                         'ВАМ ФОТО ВАШЕГО ЗАКАЗА ❗️\n\n❓ОРИГИНАЛ ИЛИ ПОДДЕЛКА❓\n❗️В НАШЕМ МАГАЗИНЕ '
+                                         'ПРЕДСТАВЛЕНА ТОЛЬКО ОРИГИНАЛЬНАЯ ПРОДУКЦИЯ. ЧТОБЫ ОТЛИЧИТЬ ОРИГИНАЛ ОТ '
+                                         'ПОДДЕЛКИ, НЕОБХОДИМО ПОСМОТРЕТЬ НА ЗАДНЮЮ СТОРОНУ КОРОБКИ ИЛИ НА ЛОГОТИП '
+                                         '(ОРИГИНАЛЬНЫЙ ЛОГОТИП ВЫ МОЖЕТЕ ВИДЕТЬ НА ФОТО). НА КАЖДОЙ КОРОБКЕ ДОЛЖЕН '
+                                         'БЫТЬ QR КОД, КОТОРЫЙ ВЫ МОЖЕТЕ ПРОВЕРИТЬ НА ОФИЦИАЛЬНОМ САЙТЕ HQD.❗️\n\n🏧ЕСЛИ'
+                                         ' У ВАС ОСТАЛИСЬ ВОПРОСЫ ПИШИТЕ МЕНЕДЖЕРУ АНДРЕЮ @pod_support🏧',
+                         parse_mode='html')
+    elif message.text == "💤ПОДДЕРЖКА💤":
+        bot.send_message(message.chat.id, '🏧ЕСЛИ У ВАС ОСТАЛИСЬ ВОПРОСЫ ПИШИТЕ МЕНЕДЖЕРУ АНДРЕЮ @pod_support🏧',
+            parse_mode='html')
+    elif message.text == "ОТЗЫВЫ": 
+        bot.send_message(message.chat.id, 'ОТЗЫВЫ ОТ НАШИХ ПОКУПАТЕЛЕЙ ВЫ МОЖЕТЕ ПРОЧИТАТЬ В НАШЕМ ТЕЛЕГРАМ КАНАЛЕ:https://t.me/joinchat/AAAAAEoIs-xyYFNXZbyEeA', 
+            parse_mode='html')
+#INFO
+    if message.text == "😎HQD Cuvie😎 🔥34̶0̶Р̶  230Р!!!!!!🔥" :
+        bot.send_message(message.chat.id,'💎Информация о HQD Cuvie💎\nПластиковый корпус\nОдноразовый испаритель\n300 - 400 затяжек\n50 мг солевого никотина',
+            parse_mode='html',reply_markup=keyboards.keyboardTasteFirst)
+        global price
+        price = 230
+    elif message.text == "🤩HQD Stark🤩 🔥̶̶3̶5̶0̶- 230Р!!!!!!🔥":
+        bot.send_message(message.chat.id,'💎Информация о HQD Stark💎\nПластиковый корпус\nОдноразовый испаритель\n300 затяжек\n50 мг солевого никотина',
+            parse_mode='html',reply_markup=keyboards.keyboardTasteFirst)
+        price = 230
+    elif message.text == "😇HQD V2😇 ̶🔥̶3̶3̶0̶- 230Р!!!!!!🔥":
+        bot.send_message(message.chat.id,'💎Информация о HQD V2💎\nПластиковый корпус\nОдноразовый испаритель\n200 - 300 затяжек\n50 мг солевого никотина',
+            parse_mode='html',reply_markup=keyboards.keyboardTasteFirst)
+        price = 230
+    elif message.text == "😜HQD Maxim😜 🔥̶4̶0̶0̶- 230Р!!!!!!🔥":
+        bot.send_message(message.chat.id,'💎Информация о HQD Maxim💎\nМеталлический корпус\nОдноразовый испаритель\n400 затяжек\n50 мг солевого никотина',
+            parse_mode='html',reply_markup=keyboards.keyboardTasteFirst)
+        price = 230
+    elif message.text == "🤑HQD Ultra Stick🤑 ̶🔥̶4̶5̶5̶- 230Р!!!!!!🔥":
+        bot.send_message(message.chat.id,'💎Информация о Ultra Stick💎\nМеталлический корпус\nОдноразовый испаритель\n500 затяжек\n50 мг солевого никотина',
+            parse_mode='html',reply_markup=keyboards.keyboardTasteFirst)
+        price = 230
+    elif message.text == '🥳HQD CUVIE PLUS🥳 ̶🔥̶̶6̶5̶0̶ 450!!!!!!🔥':
+        bot.send_message(message.chat.id,'💎Информация о HQD CUVIE PLUS💎\nПластиковый корпус\nОдноразовый испаритель\n1200 затяжек\n50 мг солевого никотина',
+            parse_mode='html',reply_markup=keyboards.keyboardSecondTaste)
+        price = 450
+ 
+#TASTE
+    if message.text == "🍓Ягодные🍓":
+        bot.send_message(message.chat.id,'Ягодный вкус',
+            parse_mode='html',reply_markup=keyboards.keyboardBerry)
+    elif message.text == "🍍Фруктовые🍍":
+        bot.send_message(message.chat.id,'Фруктовый вкус',
+            parse_mode='html',reply_markup=keyboards.keyboardFruit)
+    elif message.text == "🍿Оригинальные🍿":
+        bot.send_message(message.chat.id,'Оригинальный вкус',
+            parse_mode='html', reply_markup=keyboards.keyboardOriginal)
+ 
+#SECONDTASTE
+    if message.text == "🍎🍊Яблоко-Персик🍎🍊" :
+        bot.send_message(message.chat.id,'Выберите город',
+            parse_mode='html',reply_markup=keyboards.keyboardTown)
+    elif message.text == "🥤Розовый лимонад🥤":
+        bot.send_message(message.chat.id,'Выберите город',
+            parse_mode='html',reply_markup=keyboards.keyboardTown)
+    elif message.text == "🔹 Главная":
+        bot.send_message(message.chat.id, 'Вернулись на главную', reply_markup=keyboards.keyboardMain)
+ 
+#TOWN
+    if message.text == "Клубника" :
+        bot.send_message(message.chat.id,'Выберите город:',
+            parse_mode='html',reply_markup=keyboards.keyboardTown)
+    elif message.text == "Черника":
+        bot.send_message(message.chat.id,'Выберите город',
+            parse_mode='html',reply_markup=keyboards.keyboardTown)
+    elif message.text == "Вишня":
+        bot.send_message(message.chat.id,'Выберите город',
+            parse_mode='html', reply_markup=keyboards.keyboardTown)
+    elif message.text == "Банан":
+        bot.send_message(message.chat.id,'Выберите город',
+            parse_mode='html',reply_markup=keyboards.keyboardTown)
+    elif message.text == "Арбуз":
+        bot.send_message(message.chat.id,'Выберите город',
+            parse_mode='html', reply_markup=keyboards.keyboardTown)
+    elif message.text == "Персик":
+        bot.send_message(message.chat.id,'Выберите город',
+            parse_mode='html',reply_markup=keyboards.keyboardTown)
+    elif message.text == "Виноград":
+        bot.send_message(message.chat.id,'Выберите город',
+            parse_mode='html', reply_markup=keyboards.keyboardTown)
+    elif message.text == "Яблоко":
+        bot.send_message(message.chat.id,'Выберите город',
+            parse_mode='html', reply_markup=keyboards.keyboardTown)
+    elif message.text == "Дыня":
+        bot.send_message(message.chat.id,'Выберите город',
+            parse_mode='html',reply_markup=keyboards.keyboardTown)
+    elif message.text == "Ананас":
+        bot.send_message(message.chat.id,'Выберите город',
+            parse_mode='html', reply_markup=keyboards.keyboardTown)
+    elif message.text == "Корица":
+        bot.send_message(message.chat.id,'Выберите город',
+            parse_mode='html', reply_markup=keyboards.keyboardTown)
+    elif message.text == "Жвачка":
+        bot.send_message(message.chat.id,'Выберите город',
+            parse_mode='html',reply_markup=keyboards.keyboardTown)
+    elif message.text == "Кола":
+        bot.send_message(message.chat.id,'Выберите город',
+            parse_mode='html', reply_markup=keyboards.keyboardTown)
+    elif message.text == "Орех":
+        bot.send_message(message.chat.id,'Выберите город',
+            parse_mode='html', reply_markup=keyboards.keyboardTown)
+    elif message.text == "Мята":
+        bot.send_message(message.chat.id,'Выберите город',
+            parse_mode='html',reply_markup=keyboards.keyboardTown)
+    elif message.text == "Табак":
+        bot.send_message(message.chat.id,'Выберите город',
+            parse_mode='html', reply_markup=keyboards.keyboardTown)
+    if message.text == '🔹 Москва' or (message.text =='🔹 Санкт-Петербург' or message.text =='🔹 Ростов-на-Дону' or
+                                       message.text == '🔹 Екатеринбург' or message.text == '🔹 Челябинск' or
+                                       message.text == '🔹 Новосибирск' or message.text == '🔹 Нижний Новгород' or
+                                       message.text == '🔹 Казань' or message.text == '🔹 Омск' or message.text ==
+                                       '🔹 Самара' or message.text == '🔹 Краснодар' or message.text == '🔹 Саратов'
+                                       or message.text == '🔹 Тюмень' or message.text == '🔹 Барнаул' or message.text
+                                       == '🔹 Иркутск' or message.text == '🔹 Ярославль' or message.text ==
+                                       '🔹 Владивосток' or message.text == '🔹 Оренбург' or message.text ==
+                                       '🔹 Томск' or message.text == '🔹 Воронеж' or message.text == '🔹 Пермь'
+                                       or message.text == '🔹 Волгоград' or message.text == '🔹 Уфа' or message.text ==
+                                       '🔹 Красноярск' or message.text == '🔹 Тольятти' or message.text == '🔹 Феодосия'
+                                       or message.text == '🔹 Тимашевск' or message.text == '🔹 Пенза'):
+       bot.send_message(message.chat.id, 'Выберите способ оплаты',
+            parse_mode='html', reply_markup=keyboards.keyboardPay)
+ 
+    abc = list(message.text)
+    counter = 0
+    rer = 44
+    if len(abc) == 4:
+        for d in abc:
+            if d.isdigit():
+                counter += 1
+        if counter == 4:
+            if config.promo == '1':
+                rer = 65
+            else:
+                rer = 66
+            config.promo = message.text
+ 
+    if (message.text == "💥QIWI💥" and config.promo != '') or rer == 65:
+        bot.send_message(message.chat.id,'➖➖➖➖➖➖➖➖➖➖\n\nВы зарезервировали товар на 30⌛️ минут.\nСовершите платёж на QIWI кошелёк.С ВАМИ СВЯЖЕТСЯ МЕНЕДЖЕР\n\n➖➖➖➖➖➖➖➖➖➖\n\n🏷QIWI кошелек: 77053784882⚡️\n\n💵Сумма: ' +str(price)+ 'рублей⚡️\n\n💬Комментарий к платежу: ' + '17' + config.promo + '⚡️\n\n➖➖➖➖➖➖➖➖➖➖\n\n\n\nБЕЗ КОММЕНТАРИЯ ДЕНЬГИ НЕ ЗАЧИСЛЯЮТСЯ АВТОМАТИЧЕСКИ\n\nЕСЛИ ВОЗНИКЛИ ПРОБЛЕМЫ С ПЛАТЕЖОМ ИЛИ ОСТАЛИСЬ ВОПРОСЫ - ПИСАТЬ @pod_support',
+            parse_mode='html', reply_markup=keyboards.keyboardFinal)
+        config.promo = ''
+    if message.text == "💥QIWI💥" and config.promo == '':
+        config.promo = '1'
+        bot.send_message(message.chat.id, "Введите реферальный код. Он должен состоять из 4-х цифр.")
+    if message.text == "🌪КАРТА🌪" and config.promo == '':
+        config.promo = '2'
+        bot.send_message(message.chat.id, "Введите реферальный код. Он должен состоять из 4-х цифр.")
+    elif (message.text == "🌪КАРТА🌪" and config.promo != '') or rer == 66:
+        bot.send_message(message.chat.id,'➖➖➖➖➖➖➖➖➖➖\n\nВы зарезервировали товар на 30⌛️ минут.\nСовершите платёж на карту.С ВАМИ СВЯЖЕТСЯ МЕНЕДЖЕР\n\n➖➖➖➖➖➖➖➖➖➖\n\n🏷КАРТА: 4890494708575055⚡️\n\n💵Сумма: ' +str(price)+ ' рублей⚡️\n\n💬Комментарий к платежу: ' + '17' + config.promo + '⚡️\n\n➖➖➖➖➖➖➖➖➖➖\n\n\n\nБЕЗ КОММЕНТАРИЯ ДЕНЬГИ НЕ ЗАЧИСЛЯЮТСЯ АВТОМАТИЧЕСКИ\n\nЕСЛИ ВОЗНИКЛИ ПРОБЛЕМЫ С ПЛАТЕЖОМ ИЛИ ОСТАЛИСЬ ВОПРОСЫ - ПИСАТЬ @pod_support',
+            parse_mode='html', reply_markup=keyboards.keyboardFinal)
+        config.promo = ''
+    elif message.text == "👍Я ОПЛАТИЛ👍":
+        bot.send_message(message.chat.id, '⛔️Платеж не найден или находится в обработке,ожидайте⛔️',
+            parse_mode='html',)
